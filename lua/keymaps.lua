@@ -16,3 +16,13 @@ map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { noremap = true, silent = true })
+
+-- Toggle between buffers
+vim.keymap.set("n", "<leader><leader>", "<C-^>", { desc = "Switch to last buffer" })
+
+-- Jump to specific buffer
+for i = 1, 9 do
+	vim.keymap.set("n", "<leader>" .. i, function()
+		vim.cmd("buffer " .. i)
+	end, { desc = "Go to buffer " .. i })
+end
