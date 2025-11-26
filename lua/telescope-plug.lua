@@ -5,3 +5,9 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 
 require("telescope").load_extension("project")
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		require("persistence").save()
+	end,
+})

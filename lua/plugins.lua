@@ -32,6 +32,9 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("telescope").load_extension("project")
+		end,
 	},
 
 	{
@@ -43,6 +46,9 @@ require("lazy").setup({
 	{
 		"folke/persistence.nvim",
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		opts = {
+			options = { "buffers", "curdir", "tabpages", "winsize" },
+		},
 	},
 
 	-- File tree with icons

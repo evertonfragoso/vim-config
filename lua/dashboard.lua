@@ -83,7 +83,7 @@ local files_section = {
 local search_section = {
 	category("Search"),
 	buttons({
-		button("G", "󰈭  Live grep in project", ":Telescope live_grep<CR>"),
+		button("F", "󰈭  Live grep in project", ":Telescope live_grep<CR>"),
 		button("B", "󰂺  Search open buffers", ":Telescope buffers<CR>"),
 		button("H", "󰋖  Search help tags", ":Telescope help_tags<CR>"),
 	}),
@@ -95,7 +95,7 @@ local project_section = {
 	category("Projects / Sessions"),
 	buttons({
 		button("O", "  Open workspace folder", ":Telescope find_files<CR>"),
-		button("P", "  Open project (Telescope)", ":Telescope projects<CR>"),
+		button("P", "  Open project (Telescope)", ":Telescope project<CR>"),
 		button("S", "󰦕  Restore last session", ":lua require('persistence').load({ last = true })<CR>"),
 	}),
 }
@@ -115,7 +115,7 @@ local config_section = {
 	buttons({
 		button("C", "  Edit Neovim config", ":e ~/.config/nvim/init.lua<CR>"),
 		button("K", "󰌌  Edit keymaps", ":e ~/.config/nvim/lua/keymaps.lua<CR>"),
-		button("P", "󰒲  Plugin manager (Lazy)", ":Lazy<CR>"),
+		button("L", "󰒲  Plugin manager (Lazy)", ":Lazy<CR>"),
 		button("q", "󰗼  Quit Neovim", ":qa<CR>"),
 	}),
 }
@@ -125,29 +125,19 @@ local config_section = {
 -- ====================================================================
 
 dashboard.section.buttons.val = {
-	{ type = "padding", val = 1 },
 	files_section[1],
-	{ type = "padding", val = 1 },
 	files_section[2],
 
-	{ type = "padding", val = 1 },
 	search_section[1],
-	{ type = "padding", val = 1 },
 	search_section[2],
 
-	{ type = "padding", val = 1 },
 	project_section[1],
-	{ type = "padding", val = 1 },
 	project_section[2],
 
-	{ type = "padding", val = 1 },
 	git_section[1],
-	{ type = "padding", val = 1 },
 	git_section[2],
 
-	{ type = "padding", val = 1 },
 	config_section[1],
-	{ type = "padding", val = 1 },
 	config_section[2],
 }
 
