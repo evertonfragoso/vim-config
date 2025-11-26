@@ -14,5 +14,6 @@ require("tree")
 require("treesitter")
 require("conform-plug")
 require("linting")
+require("persistence-plug")
 
 require("dashboard")
