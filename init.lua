@@ -15,6 +15,4 @@ require("treesitter")
 require("conform-plug")
 require("linting")
 
-if vim.fn.argc() == 0 then
-	require("dashboard")
-end
+require("dashboard")

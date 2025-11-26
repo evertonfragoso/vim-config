@@ -1,6 +1,8 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
+local M = {}
+
 -- ====================================================================
 -- HEADER (EVERTRON)
 -- ====================================================================
@@ -158,3 +160,59 @@ dashboard.section.footer.opts = {
 
 -- Final setup
 alpha.setup(dashboard.opts)
+
+local function listed_file_buffers()
+	local listed = vim.fn.getbufinfo({ buflisted = 1 })
+	local clean = {}
+
+	for _, buf in ipairs(listed) do
+		local is_alpha = vim.bo[buf.bufnr].filetype == "alpha"
+		local has_name = buf.name ~= ""
+		local is_normal = vim.bo[buf.bufnr].buftype == ""
+
+		if not is_alpha and has_name and is_normal then
+			table.insert(clean, buf.bufnr)
+		end
+	end
+
+	return clean
+end
+
+local function open_dashboard_if_needed()
+	local file_buffers = listed_file_buffers()
+
+	if #file_buffers == 0 then
+		-- Clean up stray unnamed buffers so Alpha is the only focus
+		for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+			local is_alpha = vim.bo[buf.bufnr].filetype == "alpha"
+			if not is_alpha and buf.name == "" then
+				pcall(vim.api.nvim_buf_delete, buf.bufnr, { force = true })
+			end
+		end
+
+		if vim.bo.filetype ~= "alpha" then
+			vim.cmd("Alpha")
+		end
+
+		return true
+	end
+
+	return false
+end
+
+vim.api.nvim_create_autocmd("BufDelete", {
+	callback = function(args)
+		if vim.bo[args.buf].filetype == "alpha" then
+			return
+		end
+
+		vim.defer_fn(function()
+			open_dashboard_if_needed()
+		end, 20)
+	end,
+})
+
+M.listed_file_buffers = listed_file_buffers
+M.open_dashboard_if_needed = open_dashboard_if_needed
+
+return M
