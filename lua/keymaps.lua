@@ -57,6 +57,26 @@ map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { noremap = tru
 -- Toggle between buffers
 vim.keymap.set("n", "<leader><leader>", "<C-^>", { desc = "Switch to last buffer" })
 
+-- Splitting
+vim.keymap.set("n", "<leader>s", ":split<CR>", { desc = "Slit panel horizontally" })
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Slit panel vertically" })
+vim.keymap.set("n", "<leader>x", ":close<CR>", { desc = "Close current panel" })
+-- Splitting movement
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left panel" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom panel" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to up panel" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move right panel" })
+-- Splitting expanding
+vim.keymap.set("n", "mm", "<C-w>|", { desc = "Expand current panel" })
+vim.keymap.set("n", "nm", "<C-w>=", { desc = "Divide window equally" })
+
+-- Telescope
+vim.keymap.set("n", "<C-O>", ":Telescope find_fiels<CR>", { desc = "Open workspace folder" })
+vim.keymap.set("n", "<C-P>", ":Telescope project<CR>", { desc = "Open Project (Telescope)" })
+
+-- Clear search but keep active pattern
+map("n", "<Esc><Esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
+
 -- Jump to specific buffer
 for i = 1, 9 do
 	vim.keymap.set("n", "<leader>" .. i, function()

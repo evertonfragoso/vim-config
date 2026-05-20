@@ -116,10 +116,11 @@ local config_section = {
 		button("C", "  Edit Neovim config", ":e ~/.config/nvim/init.lua<CR>"),
 		button("K", "󰌌  Edit keymaps", ":e ~/.config/nvim/lua/keymaps.lua<CR>"),
 		button("L", "󰒲  Plugin manager (Lazy)", ":Lazy<CR>"),
+		button("M", "  Package manager (Mason)", ":Mason<CR>"),
 		button("q", "󰗼  Quit Neovim", ":qa<CR>"),
 	}),
 }
-
+-- 
 -- ====================================================================
 -- LAYOUT
 -- ====================================================================

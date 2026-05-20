@@ -19,6 +19,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
+opt.listchars = { tab = "»·", trail = "·", nbsp = "·" }
 
 -- Faster UI
 opt.lazyredraw = true
@@ -27,8 +28,8 @@ opt.lazyredraw = true
 vim.cmd("set background=dark")
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    vim.lsp.buf.format()
-  end,
+	pattern = "*",
+	callback = function()
+		vim.lsp.buf.format()
+	end,
 })
